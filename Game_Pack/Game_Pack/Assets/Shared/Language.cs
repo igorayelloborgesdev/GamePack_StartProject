@@ -7,30 +7,59 @@ using UnityEngine.UI;
 using System;
 
 public class Language {
-	#region Variables
-	/// <summary>
-	/// The language.
-	/// </summary>
-	private static List<List<string>> language;
-	/// <summary>
-	/// Gets the language.
-	/// </summary>
-	/// <value>The get language.</value>
+	#region Variables	
+	private static List<List<string>> language;	
 	public static List<List<string>> GetLanguage{
 		get{ 
 			return language;
 		}
 	}
+    private static string[] textLanguageNames = new string[] {
+        "language_Arab",
+        "language_Bulgarian",
+        "language_Chinese_S",
+        "language_Chinese_T",
+        "language_Croatian",
+        "language_Czech",
+        "language_Danish",
+        "language_Dutch",
+        "language_Finnish",
+        "language_French",
+        "language_German",
+        "language_Greek",
+        "language_Hebrew",
+        "language_Hindi",
+        "language_Hungarian",
+        "language_Indonesian",
+        "language_Italian",
+        "language_Japan",
+        "language_Korean",
+        "language_Lithuanian",
+        "language_Malai",
+        "language_Norwegian",
+        "language_Persian",
+        "language_Polish",
+        "language_Romanian",
+        "language_Russian",
+        "language_Serbian",
+        "language_Spanish",
+        "language_Swedish",
+        "language_Thai",
+        "language_Turkish",
+        "language_Ukrainian",
+        "language_Vietnamese"
+    };
+
 	#endregion
-	#region Methods
-	/// <summary>
-	/// Loads the language array.
-	/// </summary>
+	#region Methods	
 	public static void LoadLanguage()
 	{
 		language = new List<List<string>> ();
-		language.Add (new List<string> ());
-		language.Add (new List<string> ());
+        for(int i = 0; i < 35; i++)
+        {
+            language.Add(new List<string>());
+        }
+				
 		try
 		{
 			TextAsset textAsset = (TextAsset) Resources.Load("language");  
@@ -47,20 +76,31 @@ public class Language {
 					else
 						language [1].Add (node1.InnerText);
 				}
-			}	
+			}
+            //for(int i = 0; i < textLanguageNames.Length; i++)//----- Use this to enable all languages
+            //{
+            //    TextAsset textAsset1 = (TextAsset)Resources.Load(textLanguageNames[i]);
+            //    XmlDocument xmldoc1 = new XmlDocument();
+            //    xmldoc1.LoadXml(textAsset1.text);
+            //    XmlNodeList nodeList1 = xmldoc1.GetElementsByTagName("language");
+            //    foreach (XmlNode node1 in nodeList1)
+            //    {
+            //        XmlNodeList content1 = node1.ChildNodes;
+            //        foreach (XmlNode node2 in content1)
+            //        {
+            //            language[2 + i].Add(node2.InnerText);                        
+            //        }
+            //    }
+            //}
+
 		}catch{
 		}
-	}
-	/// <summary>
-	/// Changes the language.
-	/// </summary>
-	/// <param name="id">Identifier.</param>
-	/// <param name="languageText">Language text.</param>
+	}	
 	public static void ChangeLanguage(int id, LanguageText[] languageText)
 	{
 		try
 		{
-			Config.GetSetLanguageID = id;
+			General.GetSetConfig.languageID = id;
 			for(int i = 0; i < languageText.Length; i++){
 				languageText [i].ChangeText ();
 			}	

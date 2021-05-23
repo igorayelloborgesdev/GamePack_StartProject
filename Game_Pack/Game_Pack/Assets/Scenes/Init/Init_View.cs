@@ -1,13 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using System;
 
 public class Init_View : MonoBehaviour {
-	#region Variables
-	/// <summary>
-	/// The init controller.
-	/// </summary>
-	private Init_Controller init_Controller;
+	#region Variables	
+	private Init_Model init_Model;
 	#endregion
 	#region Behaviors
 	// Use this for initialization
@@ -19,23 +17,32 @@ public class Init_View : MonoBehaviour {
 		LoadScene ();
 	}
 	#endregion
-	#region Methods
-	/// <summary>
-	/// Init this instance.
-	/// </summary>
+	#region Methods	
 	private void Init()
 	{
-		init_Controller = new Init_Controller ();
-		init_Controller.Init ();
-	}
-	/// <summary>
-	/// Loads the scene.
-	/// </summary>
+        try
+        {
+            init_Model = new Init_Model();
+            init_Model.Init();
+        }
+        catch (Exception ex)
+        {
+            Debug.Log(ex.Message);
+        }
+		
+	}	
 	private void LoadScene()
 	{
-		init_Controller.GetSetPeriod += Time.deltaTime;
-		if(init_Controller.GoToNextScreen (init_Controller.GetSetPeriod))
-			SceneManager.LoadScene(SceneInfo.GetSceneNames[1], LoadSceneMode.Single);
+        try
+        {
+            init_Model.GetSetPeriod += Time.deltaTime;
+            if (init_Model.GoToNextScreen(init_Model.GetSetPeriod))
+                SceneManager.LoadScene(SceneInfo.GetSceneNames[1], LoadSceneMode.Single);
+        }
+        catch (Exception ex)
+        {
+            Debug.Log(ex.Message);
+        }        
 	}
 	#endregion
 }

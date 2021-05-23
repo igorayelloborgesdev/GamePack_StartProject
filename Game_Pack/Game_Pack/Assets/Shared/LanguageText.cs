@@ -24,7 +24,7 @@ public class LanguageText : MonoBehaviour {
 	/// The ID.
 	/// </summary>
 	[SerializeField]
-	private int ID;
+	private int ID = default;
 	#endregion
 	/// <summary>
 	/// Start this instance.
@@ -40,7 +40,7 @@ public class LanguageText : MonoBehaviour {
 	{
 		try
 		{
-			text.text = Language.GetLanguage [Config.GetSetLanguageID] [ID];	
+			text.text = Language.GetLanguage [General.GetSetConfig.languageID] [ID];	
 		}
 		catch {
 		}
@@ -53,7 +53,7 @@ public class LanguageText : MonoBehaviour {
 	{
 		try
 		{
-			text.text = Language.GetLanguage [Config.GetSetLanguageID] [textID];
+			text.text = Language.GetLanguage [General.GetSetConfig.languageID] [textID];
 		}
 		catch {
 		}
